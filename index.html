@@ -1,4 +1,4 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Para ti, mamá</title><meta name="description" content="Un regalo de tus hijas. Ábrelo, hay una sorpresa adentro."><meta property="og:type" content="website"><meta property="og:url" content="https://moralejadesign.github.io/tarjetasorpresa/"><meta property="og:title" content="Para ti, mamá"><meta property="og:description" content="Un regalo de tus hijas. Ábrelo, hay una sorpresa adentro."><meta property="og:image" content="https://moralejadesign.github.io/tarjetasorpresa/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Sobre rosado cerrado con un sello de corazón y el texto Para ti, mamá"><meta property="og:locale" content="es_CO"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Para ti, mamá"><meta name="twitter:description" content="Un regalo de tus hijas. Ábrelo, hay una sorpresa adentro."><meta name="twitter:image" content="https://moralejadesign.github.io/tarjetasorpresa/og.png"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Para ti, mamá</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#150b0d"><meta name="description" content="Un regalo de tus hijas. Ábrelo, hay una sorpresa adentro."><meta property="og:type" content="website"><meta property="og:url" content="https://moralejadesign.github.io/tarjetasorpresa/"><meta property="og:title" content="Para ti, mamá"><meta property="og:description" content="Un regalo de tus hijas. Ábrelo, hay una sorpresa adentro."><meta property="og:image" content="https://moralejadesign.github.io/tarjetasorpresa/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Sobre rosado cerrado con un sello de corazón y el texto Para ti, mamá"><meta property="og:locale" content="es_CO"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Para ti, mamá"><meta name="twitter:description" content="Un regalo de tus hijas. Ábrelo, hay una sorpresa adentro."><meta name="twitter:image" content="https://moralejadesign.github.io/tarjetasorpresa/og.png"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -201,7 +201,57 @@
     .tickets.show { animation: none; }
     .confetti { display: none; }
   }
+  /* Pantalla de entrada (necesaria para que el navegador permita la música) */
+  body.locked { overflow: hidden; }
+  .intro {
+    position: fixed; inset: 0; z-index: 50; border: 0; width: 100%; margin: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+    padding: 24px; text-align: center; cursor: pointer; font: inherit; color: var(--fg);
+    background: var(--bg) radial-gradient(ellipse 90% 60% at 50% 40%, rgba(193, 18, 31, 0.32), transparent 70%);
+    transition: opacity .8s ease, visibility 0s .8s; -webkit-tap-highlight-color: transparent;
+  }
+  .intro.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+  .intro > span:not(.intro-seal) { display: block; }
+  .intro .kicker { margin: 0; }
+  .intro-title { font-family: var(--font-display); font-weight: 600; font-size: clamp(54px, 15vw, 96px); line-height: .95; margin: 0; }
+  .intro-title em { color: var(--accent); }
+  .intro-seal {
+    width: 76px; height: 76px; border-radius: 50%; background: var(--red); color: var(--cream);
+    display: grid; place-items: center; font-size: 34px; margin-top: 18px;
+    box-shadow: 0 0 0 0 rgba(193, 18, 31, .6); animation: pulse 2s ease-out infinite;
+  }
+  .intro-hint { font-family: var(--font-hand); font-size: 30px; color: var(--accent); margin: 0; }
+  .intro-small { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin: 0; }
+  .intro:focus-visible { outline: 2px solid var(--accent); outline-offset: -8px; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(193, 18, 31, .6); } 100% { box-shadow: 0 0 0 26px rgba(193, 18, 31, 0); } }
+
+  /* Botón de música */
+  .music {
+    position: fixed; z-index: 40; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px));
+    width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line);
+    background: rgba(21, 11, 13, .85); color: var(--accent); font-size: 20px; cursor: pointer;
+    display: grid; place-items: center; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .music[hidden] { display: none; }
+  .music.playing { animation: spin 6s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #yt { position: fixed; left: 0; bottom: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; overflow: hidden; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro-seal, .music.playing { animation: none; }
+    .intro { transition-duration: .01s; }
+  }
 </style>
+
+<button class="intro" id="intro" type="button" aria-label="Abrir la tarjeta con música">
+  <span class="kicker">Un regalo de tus hijas</span>
+  <span class="intro-title">Para ti,<br><em>mamá</em></span>
+  <span class="intro-seal" aria-hidden="true">♥</span>
+  <span class="intro-hint">Toca para abrir</span>
+  <span class="intro-small">Sube el volumen ♪</span>
+</button>
+<button class="music" id="music" type="button" aria-label="Pausar la música" hidden>♪</button>
+<div id="yt" aria-hidden="true"><div id="yt-player"></div></div>
 
 <main class="wrap">
   <header class="hero">
@@ -349,6 +399,60 @@
     env.addEventListener('click', openEnv);
     env.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnv(); }
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    var VIDEO = 'NoWqnjmh8KU', START = 7;
+    var intro = document.getElementById('intro');
+    var btn = document.getElementById('music');
+    var player = null, ready = false, wantPlay = false, playing = false;
+
+    document.body.classList.add('locked');
+
+    window.onYouTubeIframeAPIReady = function () {
+      player = new YT.Player('yt-player', {
+        width: 200, height: 200, videoId: VIDEO,
+        playerVars: { start: START, playsinline: 1, controls: 0, rel: 0 },
+        events: {
+          onReady: function () { ready = true; if (wantPlay) play(); },
+          onStateChange: function (e) {
+            if (e.data === YT.PlayerState.PLAYING) setPlaying(true);
+            else if (e.data === YT.PlayerState.PAUSED) setPlaying(false);
+            else if (e.data === YT.PlayerState.ENDED) { player.seekTo(START, true); player.playVideo(); }
+          }
+        }
+      });
+    };
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+
+    function setPlaying(on) {
+      playing = on;
+      btn.classList.toggle('playing', on);
+      btn.textContent = on ? '♪' : '▶';
+      btn.setAttribute('aria-label', on ? 'Pausar la música' : 'Reproducir la música');
+    }
+    function play() {
+      wantPlay = true;
+      if (!ready) return;
+      player.unMute(); player.setVolume(100); player.playVideo();
+    }
+
+    intro.addEventListener('click', function () {
+      play();
+      intro.classList.add('gone');
+      document.body.classList.remove('locked');
+      btn.hidden = false;
+      setPlaying(ready);
+      setTimeout(function () { intro.remove(); }, 900);
+    });
+    btn.addEventListener('click', function () {
+      if (!ready) return;
+      if (playing) player.pauseVideo(); else play();
     });
   })();
 </script>
